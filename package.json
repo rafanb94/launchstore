@@ -1,5 +1,5 @@
 {
-  "name": "launch-store",
+  "name": "launchstore",
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafanb94/launch-store.git"
+    "url": "git+https://github.com/rafanb94/launchstore.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rafanb94/launch-store/issues"
+    "url": "https://github.com/rafanb94/launchstore/issues"
   },
-  "homepage": "https://github.com/rafanb94/launch-store#readme",
+  "homepage": "https://github.com/rafanb94/launchstore#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-pg-simple": "^6.1.0",

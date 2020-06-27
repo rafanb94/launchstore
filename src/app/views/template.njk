@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+  {% block head %}
+  <title> Launch Store</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css"/>
+  <link rel="stylesheet" href="/styles/messages.css"/>
+  <link rel="stylesheet" href="/styles/menu-accounts.css"/>
+  <link rel="stylesheet" href="/styles/session.css"/>  
+  {% endblock %}
+  </head>
+  <body>
+    {% include "parts/messages.njk" %}
+    {% include "parts/header.njk" %}
+
+     {% block content %}{% endblock %}
+
+    {% include "parts/footer.njk" %}
+
+
+  </body>
+</html>

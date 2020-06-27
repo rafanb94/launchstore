@@ -1,0 +1,22 @@
+{% extends 'template.njk' %}
+
+{% block content %}
+
+    <section class="use-dashboard container form">
+        <form method="POST" action="/users?_method=PUT">
+            <div class="header">
+                <h3>Detalhes</h3>
+            </div>
+            <div class="fields">
+                {% include 'user/form.njk' %}
+                <input type="hidden" name="id" value="{{user.id}}">
+            </div>
+            <button class="button edit" type="submit">Atualizar</button>
+        </form>
+        <form id="form-delete" action="/users?_method=DELETE" method="post">
+            <input type="hidden" name="id" value="{{user.id}}">
+            <button class="button delete" type="submit">Deletar</button>
+        </form>
+    </section>
+
+    {% endblock %}

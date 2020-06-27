@@ -1,0 +1,69 @@
+{% extends 'template.njk' %}
+
+{% block content %}
+    <section class="product-single container">
+
+        <div class="gallery">
+            <div class="highlight">
+
+                {% if not files[0] %}
+                    <img src="http://placehold.it/400x400?text=Produto sem foto"/>
+                {% else %}
+                    <img src="{{files[0].src}}" alt="{{files[0].name}}" onclick="Lightbox.open()">
+                {% endif %}
+                <div class="lightbox-target">
+                    <img src="{{files[0}.src}}" alt="files[0}.name">
+                    <a href="#" class="lightbox-close" onclick="Lightbox.close()">
+                        <i class="material-icons">close</i>
+                    </a>
+                </div>
+
+            </div>
+            <div class="gallery-preview">
+                {% for image in files %}
+                    <img src="{{image.src}}" alt="{{image.name}}" {% if loop.index0 == 0 %} class="active" {%endif%} onclick="ImageGallery.setImage(event)">
+                {% endfor %}
+            </div>
+        </div>
+        <div class="info">
+        
+            <h1>{{products.name}}</h1>
+            <div class="published">
+                <p>Plubicado em
+                    {{products.published.day}}
+                    as
+                    {{products.published.hour}}</p>
+            </div>
+            <div class="description">
+                {{products.description}}
+            </div>
+            <div class="price-buy">
+                <div class="price">
+                    {{products.price}}
+
+                    {% if products.price !== products.oldPrice %}
+                        <span class="old">{{products.oldPrice}}</span>
+                    {% endif %}
+                </div>
+
+                {% if (session.userId) and (products.user_id == session.userId)%}
+                    <p class="unavailable">voce é o vendedor</p>
+                {%else%}
+                    <div class="buy">
+                        {% if products.status == 0 %}
+                            <p class="unavailable">Indisponivel</p>
+                        {% elseif products.quantity == 0 %}
+                            <p class="unavailable">Fora de Estoque</p>
+                        {% else %}
+                            <form action="/users/orders" method="POST">
+                                <input type="hidden" name="id" value="{{products.id}}">
+                                <button class="button">Comprar</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+        </section>
+
+    {% endblock %}

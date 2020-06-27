@@ -1,0 +1,90 @@
+<div class="item">
+    <div>Categoria</div>
+    <div>
+        {# *o campo select está com o name= category_id, pois é como ele vai buscar o ID da categoria do request.body da aplicação, após o usuario ter feito o input das informações #}
+        <select name="category_id">
+            {# *categories é um Array que está sendo enviado do backend para o frontend para podermos fazer o loop das categorias#}
+        {% for category in categories %}
+            {# *Caso o ID de Categoria na tabela de products seja igual ao ID da Categoria na tabela categories, então marque como campo selecionado #}
+            <option value="{{ category.id }}"
+            {% if product.category_id == category.id %} selected {% endif %}>
+            {# *Usamos category.name {nome da coluna na tabela Categories} no value, pois quando estivermos na parte de edição,
+             queremos que o backend retorne o campo preenchido com as informações do produto.#}
+            {{ category.name }}
+            </option>
+        {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="item">
+    {# Usamos product.name{nome da coluna na tabela Products} no value, pois quando estivermos na parte de edição,
+    queremos que o backend retorne o campo preenchido com as informações do produto.#}
+    <div>Titulo do Anúncio</div>
+    <input type="text" name="name" placeholder="Digite o Titulo do Anuncio" value="{{ product.name }}">
+</div>
+
+<div class="item">
+    <div>Descrição</div>
+        <div>
+            {# Usamos product.description {nome da coluna na tabela Products}, pois quando estivermos na parte de edição,
+            queremos que o backend retorne o campo preenchido com as informações do produto.#}
+            <textarea name="description">
+                {{product.description}}
+            </textarea>
+        </div>
+</div>
+
+{# <div class="item">
+    <div>Fotos</div>
+        <div>
+            <div id="photos-upload">
+            <input id="photos-input" type="file" name="photos" multiple accept="image/*" onchange="PhotosUpload.handleFileInput(event)">
+            <p>Selecione até 6 fotos </p>
+            </div>
+            <div id="photos-preview">
+            {% if files %}
+                {% for image in files %}
+                    <div class="photo" id="{{image.id}}">
+                        <img src="{{image.src}}" alt="{{image.name}}">
+                        <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
+                    </div>
+                {% endfor %}
+                <input type="hidden" name="removed_files">
+            {%endif%}
+            </div>
+        </div>
+</div> #}
+
+<div class="item">
+    <div>Valor</div>
+    <div>
+        {# *Usamos product.price {nome da coluna na tabela Products}, pois quando estivermos na parte de edição,
+        queremos que o backend retorne o campo preenchido com as informações do produto.
+        *O Mask fará a formatação do valor do input enquanto o usuário estiver digitando o preço do produto.#}
+        <input type="text" name="price" placeholder="Preço do produto" value="{{ product.price}}">
+        {#  onkeydown="Mask.apply(this,'formatBRL')" #}
+    </div>
+        {# Usamos product.old_price {nome da coluna na tabela Products}, pois quando estivermos na parte de edição, queremos que o backend retorne o campo preenchido com as informações do produto.
+        Nesse caso também estamos verificando se existe um valor anterior, se existir mostra a div com o valor anterior do produto.#}
+        {% if product.old_price %}
+            <input type="hidden" name="old_price" value={{product.old_price}}>
+        {% endif %}
+</div>
+
+<div class="item">
+       {# Usamos product.quantity {nome da coluna na tabela Products}, pois quando estivermos na parte de edição, queremos que o backend retorne o campo preenchido com as informações do produto.#}
+    <div>Quantidade</div>
+    <input type="number" name="quantity" placeholder="Estoque" value="{{ product.quantity }}">
+</div>
+ {# Usamos product.status {nome da coluna na tabela Products}, pois quando estivermos na parte de edição, queremos que o backend retorne o campo preenchido com as informações do produto.
+ Neste caso também verificamos o status, se o produto existe em estoque ou não, fazendo com que a div só seja exibida caso não seja o cadastro do produto. #}
+{% if (product.status == '1') or (product.status == 0) %}      
+<div class="item">
+    <div>Disponivel?</div>
+    <div>
+        <span><input type="radio" name="status" value="1" {% if product.status == '1' %} checked="checked" {% endif %}>Sim</span>
+        <span><input type="radio" name="status" value="0" {% if product.status == '0' %} checked="checked" {% endif %}>Não</span>
+    </div>
+</div>
+{% endif %}

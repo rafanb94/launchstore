@@ -1,0 +1,21 @@
+{% extends 'template.njk' %}
+
+{% block content %}
+
+    <section class="container form">
+        {# o atributo action do formulário, deve retornar para URL que está configurada na rota post. 
+        enctype="multipart/form-data"
+         #}
+        <form method="POST" action="/produtos">
+            <div class="header">
+                <h3>Cadastrar Produto {{productId}}</h3>
+            </div>
+            <div class="fields">
+                {% include 'products/form.njk' %}
+            </div>
+
+            <button class="button" type="submit">Salvar</button>
+        </form>
+    </section>
+
+    {% endblock %}
