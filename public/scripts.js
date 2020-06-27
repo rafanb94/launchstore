@@ -1,11 +1,11 @@
-const currentPagePath = location.pathname;
-const menuItems = document.querySelectorAll("header .links a");
+// const currentPagePath = location.pathname;
+// const menuItems = document.querySelectorAll("header .links a");
 
-for (item of menuItems) {
-  if (currentPagePath.includes(item.getAttribute("href"))) {
-    item.classList.add("active");
-  }
-}
+// for (item of menuItems) {
+//   if (currentPagePath.includes(item.getAttribute("href"))) {
+//     item.classList.add("active");
+//   }
+// }
 
 const formDelete = document.querySelector("#form-delete");
 if (formDelete != null) {
@@ -74,7 +74,10 @@ if (pagination) {
 const Mask = {
   apply(input, func) {
     setTimeout(function () {
-      input.value = Mask[func](input.value);
+      input.value = Mask[func](input.value); 
+      //? o input que está sendo passado por parametro nessa função, é o valor de 'this' que está sendo obtido no html - product/form.njk - que neste caso é o que é digitado no formulário.
+      //? Usamos o .value o que nos permite pegar o valor do que foi digitado no input.
+      //A função Mask está de forma dinamica Mask[func] onde func pode ser qualquer outra função que colocarmos dentro do objeto
     }, 1);
   },
   formatBRL(value) {

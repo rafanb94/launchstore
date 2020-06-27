@@ -29,9 +29,7 @@
         <div>
             {# Usamos product.description {nome da coluna na tabela Products}, pois quando estivermos na parte de edição,
             queremos que o backend retorne o campo preenchido com as informações do produto.#}
-            <textarea name="description">
-                {{product.description}}
-            </textarea>
+            <textarea name="description">{{product.description}}</textarea>
         </div>
 </div>
 
@@ -62,8 +60,13 @@
         {# *Usamos product.price {nome da coluna na tabela Products}, pois quando estivermos na parte de edição,
         queremos que o backend retorne o campo preenchido com as informações do produto.
         *O Mask fará a formatação do valor do input enquanto o usuário estiver digitando o preço do produto.#}
-        <input type="text" name="price" placeholder="Preço do produto" value="{{ product.price}}">
-        {#  onkeydown="Mask.apply(this,'formatBRL')" #}
+        <input
+        type="text"
+        name="price"
+        placeholder="Preço do produto"
+        value="{{ product.price}}"
+        onkeydown="Mask.apply(this, 'formatBRL')">
+        {# Estamos aplicando a formatação da moeda diretamente no campo, esse método funciona para qualquer tipo de evento 'ON',  usamos o parametro 'this' para referenciar ao valor que sera obtido neste input e aplicamos a função 'formatBRL' para aplicar a mascara.#}
     </div>
         {# Usamos product.old_price {nome da coluna na tabela Products}, pois quando estivermos na parte de edição, queremos que o backend retorne o campo preenchido com as informações do produto.
         Nesse caso também estamos verificando se existe um valor anterior, se existir mostra a div com o valor anterior do produto.#}

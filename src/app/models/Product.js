@@ -16,15 +16,17 @@ module.exports = {
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING id
         `
+    data.price = data.price.replace(/\D/g, "") // Limpando a formatação do texto para podemos inserir no banco de dados.
+    
     const values = [
         data.category_id,
-        1,
+        data.user || 1,
         data.name,
         data.description,
-        data.old_price,
+        data.old_price || data.price,
         data.price,
         data.quantity,
-        data.status,
+        data.status || 1,
     ] // passamos data como parametros para termos acesso aos valores da tabela.
  
     return db.query(query, values)
