@@ -1,7 +1,8 @@
 const db = require('../config/db')
+const { finished } = require('nodemailer/lib/xoauth2')
 
 module.exports = {
-    
+    //*Cadastrar produto no banco
     create(data) {
         const query = `
         INSERT INTO products(
@@ -17,10 +18,10 @@ module.exports = {
         RETURNING id
         `
     data.price = data.price.replace(/\D/g, "") // Limpando a formatação do texto para podemos inserir no banco de dados.
-    
+
     const values = [
         data.category_id,
-        data.user || 1,
+        data.user_id || 1,
         data.name,
         data.description,
         data.old_price || data.price,
@@ -30,5 +31,38 @@ module.exports = {
     ] // passamos data como parametros para termos acesso aos valores da tabela.
  
     return db.query(query, values)
+    },
+    //* Buscar produto por um ID
+    find(id) {
+        return db.query('SELECT * FROM products WHERE id = $1', [id])
+    },
+    update(data){
+        const query = `
+        UPDATE products SET
+            category_id=($1),
+            user_id=($2),
+            name=($3),
+            description=($4),
+            old_price=($5),
+            price=($6),
+            quantity=($7),
+            status=($8)
+        WHERE id = $9
+        `
+        const values = [
+            data.category_id ,
+            data.user_id,
+            data.name,
+            data.description,
+            data.old_price,
+            data.price,
+            data.quantity,
+            data.status,
+            data.id
+        ]
+        return db.query(query,values)
+    },
+    delete(id) {
+        return db.query('DELETE FROM products WHERE id = $1', [id])
     }
 }

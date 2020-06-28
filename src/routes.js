@@ -11,9 +11,18 @@ routes.get('/produtos/cadastrar', ProductController.create)
     Neste caso estamos chamando a funcao ' Create ' que está no ProductController para executar a ação de chamar a página de criação do cadastro do produto.*/
 
     /**URL:/produtos/cadastrar' para entrar nessa rota, porém, a resposta(response) deve retornar o nome exato do arquivo ("layout.njk") para poder renderizar as páginas.*/
+
+routes.get('/produtos/:id/editar', ProductController.edit)
+
 routes.post('/produtos', ProductController.post)
-    //No primeiro parametro estamos passando a URL que sera usado no Action do formulário na parte de salvar.
-    // Ao darmos submit no formulário, sera chamada a função ' POST ' que enviara os dados para o banco.
+    /*No primeiro parametro estamos passando a URL que sera usada no Action do formulário na parte de salvar.
+    Ao darmos submit no formulário, sera chamada a função ' POST ' que enviara os dados para o banco.*/
+routes.put('/produtos', ProductController.put)
+    /*No primeiro parametro estamos passando a URL que sera usada no Action do
+    formulário na hora de editar/salvar. 
+    Ao darmos submit no formulário, sera chamada a função 'PUT', que salvara a alteração e mandara os dados atualizados para o banco. 
+    */
+routes.delete('/produtos',ProductController.delete)
 
 //Alias
 routes.get('/novo-anuncio/cadastrar', function(request, response){
