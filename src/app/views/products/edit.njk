@@ -3,8 +3,8 @@
 {% block content %}
 
     <section class="container form">
-        <form method="POST" action="/produtos?_method=PUT">
-        {# enctype="multipart/form-data #}
+        <form method="POST" action="/produtos?_method=PUT" enctype="multipart/form-data">
+        {# o atributo enctype="multipart/form-data" nos permite enviar multiplos arquivios graças ao Multer#}
             <div class="header">
                 <h3>Editar Produto {{productId}}</h3>
             </div>

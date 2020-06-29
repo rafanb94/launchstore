@@ -4,9 +4,9 @@
 
     <section class="container form">
         {# o atributo action do formulário, deve retornar para URL que está configurada na rota post. 
-        enctype="multipart/form-data"
          #}
-        <form method="POST" action="/produtos">
+        <form method="POST" action="/produtos" enctype="multipart/form-data">
+        {# o atributo enctype="multipart/form-data" nos permite enviar multiplos arquivios graças ao Multer#}
             <div class="header">
                 <h3>Cadastrar Produto {{productId}}</h3>
             </div>

@@ -27,22 +27,22 @@
         </div>
         <div class="info">
         
-            <h1>{{products.name}}</h1>
+            <h1>{{product.name}}</h1>
             <div class="published">
                 <p>Plubicado em
-                    {{products.published.day}}
+                    {{product.published.day}}
                     as
-                    {{products.published.hour}}</p>
+                    {{product.published.hour}}</p>
             </div>
             <div class="description">
-                {{products.description}}
+                {{product.description}}
             </div>
             <div class="price-buy">
                 <div class="price">
-                    {{products.price}}
+                    {{product.price}}
 
-                    {% if products.price !== products.oldPrice %}
-                        <span class="old">{{products.oldPrice}}</span>
+                    {% if product.price !== product.oldPrice %}
+                        <span class="old">{{product.oldPrice}}</span>
                     {% endif %}
                 </div>
 
@@ -50,13 +50,13 @@
                     <p class="unavailable">voce é o vendedor</p>
                 {%else%}
                     <div class="buy">
-                        {% if products.status == 0 %}
+                        {% if product.status == 0 %}
                             <p class="unavailable">Indisponivel</p>
-                        {% elseif products.quantity == 0 %}
+                        {% elseif product.quantity == 0 %}
                             <p class="unavailable">Fora de Estoque</p>
                         {% else %}
                             <form action="/users/orders" method="POST">
-                                <input type="hidden" name="id" value="{{products.id}}">
+                                <input type="hidden" name="id" value="{{product.id}}">
                                 <button class="button">Comprar</button>
                             </form>
                         {% endif %}

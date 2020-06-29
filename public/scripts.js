@@ -114,7 +114,7 @@ const Mask = {
     return value;
   },
 };
-
+//TODO: Rever as aulas: Gerenciador de imagens no Front end
 const PhotosUpload = {
   input: "",
   preview: document.querySelector("#photos-preview"),
@@ -216,16 +216,16 @@ const PhotosUpload = {
 };
 
 const ImageGallery = {
-  highlight: document.querySelector(".gallery .highlight> img"),
+  highlight: document.querySelector(".gallery .highlight > img"),
   previews: document.querySelectorAll(".gallery-preview img"),
   setImage(e) {
-    const { target } = e;
-    ImageGallery.previews.forEach((preview) =>
+    const { target } = e; //pegamos o target do event 
+    ImageGallery.previews.forEach((preview) => // verificamos com o forEach, se se as imagens na galeria ja estavam com a classe .active e caso sim, remove deixando apenas no elevento clicado e que esta no event target.
       preview.classList.remove("active")
     );
-    target.classList.add("active");
-    ImageGallery.highlight.src = target.src;
-    Lightbox.image.src = target.src;
+    target.classList.add("active");//adiciona a classe .active no elemento clicado
+    ImageGallery.highlight.src = target.src;//Aqui o ImageGAllery ira receber o caminho da imagem que está sendo o target do clique, assimm, mudando o foco do preview no produto-single.
+    Lightbox.image.src = target.src// Aqui o Lightbox ira receber o caminho da imagem que está sendo o target do clique, assim, mudando a imagem do efeito lightbox.
   },
 };
 
@@ -233,7 +233,7 @@ const Lightbox = {
   target: document.querySelector(".lightbox-target"),
   image: document.querySelector(".lightbox-target img"),
   closeButton: document.querySelector(".lightbox-target a.lightbox-close"),
-  open() {
+  open() {//Muda as propriedades da imagem para criar o efeito zoom da imagem.
     Lightbox.target.style.opacity = 1;
     Lightbox.target.style.top = 0;
     Lightbox.target.style.bottom = 0;
